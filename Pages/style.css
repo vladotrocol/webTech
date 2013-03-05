@@ -1,0 +1,41 @@
+#topBar{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 5%;
+	width: 100%;
+	background-color: #000;
+}
+
+#sideBar{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 12%;
+	background-color: #aaa;
+}
+
+.mainPanel{
+	position: absolute;
+	width: 50%;
+	height: 100%;
+}
+
+#boxesWrapper{
+	position: absolute;
+	background-color: #0f0;
+}
+
+#editorBox{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	background-color: #00f;
+}
+#previewBox{
+	position: absolute;
+	left: 50%;
+	top: 0px;
+	background-color: #0ff;
+}
