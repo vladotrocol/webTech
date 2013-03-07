@@ -1,41 +1,53 @@
 #topBar{
 	position: absolute;
-	top: 0px;
-	left: 0px;
-	height: 5%;
-	width: 100%;
-	background-color: #000;
+	background-color: #0f0;
 }
 
 #sideBar{
 	position: absolute;
-	top: 0px;
-	left: 0px;
-	height: 100%;
-	width: 12%;
-	background-color: #aaa;
+	background-color: #ddd;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	border-left: 1px solid;
+}
+
+.lineSeparator{
+	position: absolute;
+	height: 0.2%;
+}
+
+#rescalerL{
+	position: absolute;
+	background-color: #ff0;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	border-left: 1px solid;
+	border-right: 1px solid;
+}
+
+#rescalerR{
+	position: absolute;
+	background-color: #ff0;
+	border-left: 1px solid;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
 }
 
 .mainPanel{
 	position: absolute;
-	width: 50%;
-	height: 100%;
+	border: 1px solid;
 }
 
-#boxesWrapper{
+#cWrapper{
 	position: absolute;
-	background-color: #0f0;
+	background-color: #0fa;
 }
 
 #editorBox{
 	position: absolute;
-	left: 0px;
-	top: 0px;
-	background-color: #00f;
+	background-color: #f00;
 }
 #previewBox{
 	position: absolute;
-	left: 50%;
-	top: 0px;
 	background-color: #0ff;
 }

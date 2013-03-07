@@ -1,46 +1,82 @@
+// HTML Elements
 var wrapper;
 var editorBox;
 var previewBox;
 var topBar;
 var sideBar;
+var rescaler;
+
+//Size Variables
+var sideBarBoxHeight = 50;
+var rescalerSize = 5;
 
 window.onload = viewDidLoad;
 window.onresize = viewDidResize;
 
-function viewDidLoad(){	
+
+function viewDidLoad(){
+
 	wrapper = document.getElementById("boxesWrapper");
 	editorBox = document.getElementById("editorBox");
 	previewBox = document.getElementById("previewBox");
 	topBar = document.getElementById("topBar");
 	sideBar = document.getElementById("sideBar");
+	rescaler = document.getElementById("rescaler");
 
-	topBar.style.height = window.innerHeight/20 + "px";
-	sideBar.style.width = window.innerWidth*12/100 + "px";
+	resizeHtml();
+	generateSeparators(4);
+}
 
-	wrapper.style.height = window.innerHeight -topBar.style.height.split("px")[0] -1+ "px";
-	wrapper.style.width = window.innerWidth - sideBar.style.width.split("px")[0] -1+ "px";
-	wrapper.style.top = topBar.style.height;
-	wrapper.style.left = sideBar.style.width;
+function generateSeparators(n){
 
-	editorBox.style.height = wrapper.style.height.split("px")[0]-10+"px";
+	var com = document.createComment("Separators");
+	sideBar.appendChild(com);
+
+	for(var i=0;i<n;i++){
+
+		var newSeparator=document.createElement("img");
+
+		newSeparator.src = "images\\separator.png";
+		newSeparator.style.top = (parseInt(topBar.style.height.split("px")[0], 10) + (i+1)*sideBarBoxHeight) + "px";
+		newSeparator.width = (parseInt(sideBar.style.width.split("px")[0],10) * (100-rescalerSize)/100) - 1;
+		newSeparator.className = "lineSeparator";
+
+		sideBar.appendChild(newSeparator);
+	}
+}
+
+function sideBarRescaler(){
 	
-	previewBox.style.height = wrapper.style.height.split("px")[0]-10+"px";
-	previewBox.style.left = wrapper.style.width.split("px")[0]/2 +"px";
+	rescaler.style.top = 0 + "px";
+	rescaler.style.left = (parseInt(sideBar.style.width.split("px")[0],10) * (100-rescalerSize)/100) + "px";
+	rescaler.style.height = (parseInt(sideBar.style.height.split("%")[0],10)) + "px";
+	rescaler.style.width = (parseInt(sideBar.style.width.split("px")[0],10) * rescalerSize/100) + "px";
+}
+
+function resizeHtml(){
+	topBar.style.height = window.innerHeight/20 + "px";
+	topBar.style.width = window.innerWidth + "px";
+
+	sideBar.style.width = window.innerWidth*12/100 + "px";
+	sideBar.style.height = (window.innerHeight - parseInt(topBar.style.height.split("px")[0], 10)) + "px";
+	sideBar.style.top = (parseInt(topBar.style.height.split("px")[0], 10)+1) + "px";
+
+	wrapper.style.height = (window.innerHeight - parseInt(topBar.style.height.split("px")[0], 10)) + "px";
+	wrapper.style.width = (window.innerWidth - parseInt(sideBar.style.width.split("px")[0], 10)) + "px";
+	wrapper.style.top = topBar.style.height;
+	wrapper.style.left = (parseInt(sideBar.style.width.split("px")[0], 10)+1) + "px";
+
+	editorBox.style.height = wrapper.style.height.split("px")[0] + "px";
+	editorBox.style.width = (parseInt(wrapper.style.width.split("px")[0],10)/2-1) + "px";
+
+	previewBox.style.height = wrapper.style.height.split("px")[0] + "px";
+	previewBox.style.left = (parseInt(wrapper.style.width.split("px")[0],10)/2) + "px";
+	previewBox.style.width = (parseInt(wrapper.style.width.split("px")[0],10)/2-10) + "px";
+
+	sideBarRescaler();
 }
 
 function viewDidResize(){
-	// alert(topBar.style.height.split("px")[0] + "px");
-	topBar.style.height = window.innerHeight/20 + "px";	
-	sideBar.style.width = window.innerWidth*12/100 + "px";
-
-	wrapper.style.height = window.innerHeight -topBar.style.height.split("px")[0] -1 + "px";
-	wrapper.style.width = window.innerWidth - sideBar.style.width.split("px")[0] -1 + "px";
-	wrapper.style.top = topBar.style.height.split("px")[0] + "px";
-	wrapper.style.left = sideBar.style.width.split("px")[0] + "px";
-
-	editorBox.style.height = wrapper.style.height.split("px")[0]-10+"px";
-	
-	previewBox.style.height = wrapper.style.height.split("px")[0]-10 +"px";
-	previewBox.style.left = wrapper.style.width.split("px")[0]/2 +"px";
+	resizeHtml();
 }
 
