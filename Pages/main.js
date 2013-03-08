@@ -102,7 +102,59 @@ function initHtml(){
 	sizeElements();
 	initSizeHtml();
 	generateSeparators(3);
+	addEditContentWrappers();
 }
+
+//Adding content
+
+var editingEls=new Array();
+//Left side
+function addEditContentWrapper(heightD, widthD){
+	var newDiv = document.createElement("div");
+	var inner = document.getElementById("innerE");
+	newDiv.id = "L"+(editingEls.length+1);
+	inner.appendChild(newDiv);
+	var d = new htmlEl("L"+(editingEls.length+1));
+	d.init();
+	d.el.className = "wrapper shadow";
+	d.Width(widthD);
+	d.Height(heightD);
+	d.el.style.marginBottom = h.editorBox.height*5/100+"px";
+	d.initSize();
+	d.Width(widthD*h.editorBox.width/100);
+	d.Height(heightD*h.editorBox.height/100);
+	editingEls.push(d);
+}
+
+function computeMaxHolderWidth(){
+	var max=0;
+	for(var el in editingEls){
+		if(editingEls[el].width>max){
+			max=editingEls[el].width;
+		}
+	}
+	document.getElementById("innerE").style.width=max+"px";
+}
+
+function addEditContentWrappers(){
+	addEditContentWrapper(10, 81);
+	addEditContentWrapper(5, 70);
+	addEditContentWrapper(30, 81);
+	computeMaxHolderWidth();
+}
+
+function resizeEditContentWrappers(){
+	for(var el in editingEls){
+		if(window.innerWidth>640){
+			editingEls[el].Width(editingEls[el].initWidth*h.editorBox.width/100);
+		}
+		if(window.innerHeight>480){
+			editingEls[el].Height(editingEls[el].initHeight*h.editorBox.height/100);
+		}
+	}
+}
+
+
 
 //Listener functions
 
@@ -126,6 +178,8 @@ function viewDidLoad(){
 
 function viewDidResize(){
 	resizeElements();
+	resizeEditContentWrappers();
+	computeMaxHolderWidth();
 }
 
 function setNewRPos(){
