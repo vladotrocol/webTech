@@ -11,6 +11,8 @@ function htmlEl(id){
 	this.initWidth = 0;
 	this.initTop = 0;
 	this.initLeft = 0;
+	this.font = 0;
+	this.initFont = 0;
 };
 
 htmlEl.prototype.init = function(){
@@ -22,6 +24,7 @@ htmlEl.prototype.initSize = function(){
 	this.initWidth = this.width;
 	this.initTop = this.top;
 	this.initLeft = this.left;
+	this.initFont = this.font;
 };
 
 htmlEl.prototype.Top = function(t){
@@ -51,4 +54,9 @@ htmlEl.prototype.Width = function(w){
 htmlEl.prototype.Color = function(c){
 	this.color = c;
 	this.el.style.background = c;
+}
+
+htmlEl.prototype.Font = function(f){
+	this.font = f;
+	this.el.style.fontSize = f+"px";
 }

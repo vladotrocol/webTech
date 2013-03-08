@@ -1,11 +1,25 @@
-#topBar{
-	position: absolute;
-    -moz-user-select: none; 
+#topBar, #sideBar, .lineSeparator, .textHolder, .mainPanel, .holder, #cWrapper{
+	-moz-user-select: none; 
     -khtml-user-select: none; 
     -webkit-user-select: none; 
     -o-user-select: none; 
-    background-image:url("images\\tile3.png");
-	background-repeat:repeat;
+}
+
+#topBar{
+	position: absolute;
+    /*background-image:url("images\\tile3.png");*/
+	/*background-repeat:repeat;*/
+}
+
+#logo{
+	position: absolute;
+	/*//background-color: #fff;*/
+}
+
+.textHolder{
+	font-family: 'Signika', sans-serif;
+	text-align: center;
+	color: #ffa240;
 }
 
 #sideBar{
@@ -15,19 +29,11 @@
 	border-bottom: 1px solid;
 	border-left: 1px solid;
 	border-color: #aaa;
-	-moz-user-select: none; 
-    -khtml-user-select: none; 
-    -webkit-user-select: none; 
-    -o-user-select: none; 
 }
 
 .lineSeparator{
 	position: absolute;
 	height: 0.2%;
-	-moz-user-select: none; 
-    -khtml-user-select: none; 
-    -webkit-user-select: none; 
-    -o-user-select: none; 
 }
 
 #rescalerL,#rescalerR{
@@ -38,10 +44,6 @@
 	border-right: 1px solid;
 	border-color: #aaa;
 	border-top: 1px solid;
-	-moz-user-select: none; 
-    -khtml-user-select: none; 
-    -webkit-user-select: none; 
-    -o-user-select: none; 
 }
 
 
@@ -49,18 +51,10 @@
 	position: absolute;
 	border-top: 1px solid;
 	border-color: #333;
-	-moz-user-select: none; 
-    -khtml-user-select: none; 
-    -webkit-user-select: none; 
-    -o-user-select: none; 
 }
 
 #cWrapper{
 	position: absolute;
-	-moz-user-select: none; 
-    -khtml-user-select: none; 
-    -webkit-user-select: none; 
-    -o-user-select: none; 
     background-image:url("images\\tile1.png");
 	background-repeat:repeat;
 }

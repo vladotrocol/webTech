@@ -6,7 +6,8 @@ var h = {
 	cWrapper: "cWrapper",
 	editorBox: "editorBox",
 	rescalerR: "rescalerR",
-	previewBox: "previewBox"
+	previewBox: "previewBox",
+	logo: "logo"
 };
 
 var P0={x:0,y:0}, P1={x:0,y:0}, D1={x:0,y:0}, D2={x:0,y:0};
@@ -60,10 +61,11 @@ function sizeElements(){
 	resEl(h.editorBox, 0, window.innerWidth*12/100+1+h.rescalerL.width, h.cWrapper.height-2, (h.cWrapper.width - h.sideBar.width-h.rescalerL.width)/2);
 	resEl(h.rescalerR, 0, h.editorBox.width+1+h.sideBar.width+h.rescalerL.width, h.editorBox.height, h.rescalerL.width);
 	resEl(h.previewBox, 0,h.rescalerR.left+h.rescalerR.width, h.editorBox.height, h.editorBox.width-3-h.rescalerR.width);
+	resEl(h.logo, h.topBar.height/10, 0, h.topBar.height/2, h.sideBar.width);
+	h.logo.Font(h.topBar.height*2/3);
 }
 
 function resizeInjectedElements(){
-	//Resize injected html elements
 	var seps = document.getElementsByClassName("lineSeparator");
 	for(var i=0; i<seps.length;i++){
 		if(window.innerHeight>480){
@@ -75,6 +77,10 @@ function resizeInjectedElements(){
 	}
 }
 
+function resizeFonts(){
+	h.logo.Font(h.logo.initFont*window.innerHeight/wH);
+}
+
 function resizeElements(){
 	for(var el in h){
 		if(window.innerWidth>640){
@@ -84,6 +90,7 @@ function resizeElements(){
 		if(window.innerHeight>480){
 			h[el].Height(h[el].initHeight*window.innerHeight/wH-1);
 			h[el].Top(h[el].initTop*window.innerHeight/wH-1);
+			resizeFonts();
 		}
 	}
 	resizeInjectedElements();
@@ -202,7 +209,6 @@ function mUp(e){
 }
 
 function mMove(e){
-		h.topBar.el.innerHTML =h.rescalerL.initLeft+ " " + h.rescalerL.left;//to be removed
 	if(md){
 		P1 = getMouseWin(e);
 		if(lR){
