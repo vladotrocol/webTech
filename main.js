@@ -7,7 +7,11 @@ var h = {
 	editorBox: "editorBox",
 	rescalerR: "rescalerR",
 	previewBox: "previewBox",
-	logo: "logo"
+	logo: "logo",
+	signup: "signup",
+	centeredText: "centeredText",
+	centeredText2: "centeredText2",
+	login: "login"
 };
 
 var P0={x:0,y:0}, P1={x:0,y:0}, D1={x:0,y:0}, D2={x:0,y:0};
@@ -46,7 +50,8 @@ function generateSeparators(n){
 
 		newSeparator.src = ".\\Images\\separator.png";
 		newSeparator.style.top = ((i+1)*h.topBar.height*window.innerWidth/wW) + "px";
-		newSeparator.style.width = (parseInt(h.sideBar.width,10)-2)+"px";
+		newSeparator.style.width = (h.sideBar.width-2)+"px";
+		newSeparator.style.height = (parseInt(h.sideBar.height/400,10))+ "px";
 		newSeparator.className = "lineSeparator";
 
 		h.sideBar.el.appendChild(newSeparator);
@@ -62,7 +67,13 @@ function sizeElements(){
 	resEl(h.rescalerR, 0, h.editorBox.width+1+h.sideBar.width+h.rescalerL.width, h.editorBox.height, h.rescalerL.width);
 	resEl(h.previewBox, 0,h.rescalerR.left+h.rescalerR.width, h.editorBox.height, h.editorBox.width-3-h.rescalerR.width);
 	resEl(h.logo, h.topBar.height/10, 0, h.topBar.height/2, h.sideBar.width);
+	resEl(h.signup, 0, h.topBar.width-h.sideBar.width*2/3, h.topBar.height, h.sideBar.width/2);
+	resEl(h.login, 0, h.topBar.width-h.sideBar.width*7/6, h.topBar.height, h.sideBar.width/2);
+	resEl(h.centeredText, h.topBar.height/3, 0, 0, h.sideBar.width/2);
+	resEl(h.centeredText2, h.topBar.height/3, 0, 0, h.sideBar.width/2);
 	h.logo.Font(h.topBar.height*2/3);
+	h.centeredText.Font(h.topBar.height/3);
+	h.centeredText2.Font(h.topBar.height/3);
 }
 
 function resizeInjectedElements(){
@@ -79,6 +90,8 @@ function resizeInjectedElements(){
 
 function resizeFonts(){
 	h.logo.Font(h.logo.initFont*window.innerHeight/wH);
+	h.centeredText.Font(h.centeredText.initFont*window.innerHeight/wH);
+	h.centeredText2.Font(h.centeredText.initFont*window.innerHeight/wH);
 }
 
 function resizeElements(){
@@ -147,9 +160,11 @@ function resizeEditContentWrappers(){
 	for(var el in editingEls){
 		if(window.innerWidth>640){
 			editingEls[el].Width(editingEls[el].initWidth*h.editorBox.width/100);
+			editingEls[el].el.style.marginBottom = h.editorBox.height*5/100+"px";
 		}
 		if(window.innerHeight>480){
 			editingEls[el].Height(editingEls[el].initHeight*h.editorBox.height/100);
+			editingEls[el].el.style.marginBottom = h.editorBox.height*5/100+"px";
 		}
 	}
 }
@@ -166,6 +181,10 @@ function addListeners(){
 	h.rescalerR.el.onmouseover = mROver;
 	h.rescalerL.el.onmouseout = mLOut;
 	h.rescalerR.el.onmouseout = mROut;
+	document.getElementById("login").onmouseover = turnWhite1;
+	document.getElementById("signup").onmouseover = turnWhite2;	
+	document.getElementById("login").onmouseout = turnBack1;
+	document.getElementById("signup").onmouseout = turnBack2;
 }
 
 
@@ -290,3 +309,23 @@ function mMove(e){
 //Listeners
 window.onload = viewDidLoad;
 window.onresize = viewDidResize;
+
+
+function turnWhite1(e){
+		document.getElementById("login").style.backgroundColor = "#fff";
+		document.getElementById("login").style.color = "#000";
+}
+
+function turnWhite2(e){
+		document.getElementById("signup").style.backgroundColor = "#fff";
+		document.getElementById("signup").style.color = "#000";
+}
+function turnBack1(e){
+		document.getElementById("login").style.backgroundColor = "rgba(0,0,0,0)";
+		document.getElementById("login").style.color = "#fff";
+}
+
+function turnBack2(e){
+		document.getElementById("signup").style.backgroundColor = "#0776A0";
+		document.getElementById("signup").style.color = "#fff";
+}

@@ -39,13 +39,28 @@
 
 #logo{
 	position: absolute;
-	/*//background-color: #fff;*/
+	color: #ffa240;
 }
 
 .textHolder{
 	font-family: 'Signika', sans-serif;
 	text-align: center;
-	color: #ffa240;
+}
+
+#signup{
+	position: absolute;
+	color: #fff;
+	background-color: #0776A0;
+}
+
+#login{
+	position: absolute;
+	color: #fff;
+}
+
+#centeredText,#centeredText2{
+	position: absolute;
+	text-align: center;
 }
 
 #sideBar{
@@ -59,6 +74,7 @@
 
 .lineSeparator{
 	position: absolute;
+	height: 0.25%;
 }
 
 #rescalerL,#rescalerR{
