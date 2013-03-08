@@ -201,6 +201,8 @@ function resizeLHtml(){
 		h.editorBox.Left(h.editorBox.left+D1.x);
 		h.editorBox.Width(h.editorBox.width-D1.x);
 		resizeInjectedElements();
+		resizeEditContentWrappers();
+		computeMaxHolderWidth();
 	}
 }
 
@@ -211,6 +213,8 @@ function resizeRHtml(){
 		h.previewBox.Left(h.previewBox.left+D2.x);
 		h.previewBox.Width(h.previewBox.width-D2.x);
 		resizeInjectedElements();
+		resizeEditContentWrappers();
+		computeMaxHolderWidth();
 	}
 }
 
