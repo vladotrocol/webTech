@@ -44,7 +44,7 @@ function generateSeparators(n){
 
 		var newSeparator=document.createElement("img");
 
-		newSeparator.src = "images\\separator.png";
+		newSeparator.src = ".\\Images\\separator.png";
 		newSeparator.style.top = ((i+1)*h.topBar.height*window.innerWidth/wW) + "px";
 		newSeparator.style.width = (parseInt(h.sideBar.width,10)-2)+"px";
 		newSeparator.className = "lineSeparator";
