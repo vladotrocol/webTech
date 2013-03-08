@@ -45,7 +45,7 @@ function generateSeparators(n){
 		var newSeparator=document.createElement("img");
 
 		newSeparator.src = "images\\separator.png";
-		newSeparator.style.top = ((i+1)*50*window.innerWidth/wW) + "px";
+		newSeparator.style.top = ((i+1)*h.topBar.height*window.innerWidth/wW) + "px";
 		newSeparator.style.width = (parseInt(h.sideBar.width,10)-2)+"px";
 		newSeparator.className = "lineSeparator";
 
@@ -69,10 +69,10 @@ function resizeInjectedElements(){
 	var seps = document.getElementsByClassName("lineSeparator");
 	for(var i=0; i<seps.length;i++){
 		if(window.innerHeight>480){
-			seps[i].style.top = ((i+1)*50*window.innerWidth/wW) + "px";
+			seps[i].style.top = ((i+1)*h.topBar.height) + "px";
 		}
 		if(window.innerWidth>640){
-			seps[i].style.width = (parseInt(h.sideBar.width,10)-10)+"px";
+			seps[i].style.width = (parseInt(h.sideBar.width,10)-3)+"px";
 		}
 	}
 }
@@ -84,12 +84,12 @@ function resizeFonts(){
 function resizeElements(){
 	for(var el in h){
 		if(window.innerWidth>640){
-			h[el].Width(h[el].initWidth*window.innerWidth/wW-1);
-			h[el].Left(h[el].initLeft*window.innerWidth/wW-1);
+			h[el].Width(h[el].initWidth*window.innerWidth/wW);
+			h[el].Left(h[el].initLeft*window.innerWidth/wW);
 		}
 		if(window.innerHeight>480){
-			h[el].Height(h[el].initHeight*window.innerHeight/wH-1);
-			h[el].Top(h[el].initTop*window.innerHeight/wH-1);
+			h[el].Height(h[el].initHeight*window.innerHeight/wH);
+			h[el].Top(h[el].initTop*window.innerHeight/wH);
 			resizeFonts();
 		}
 	}
