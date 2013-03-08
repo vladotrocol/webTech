@@ -15,7 +15,7 @@ var h = {
 };
 
 var P0={x:0,y:0}, P1={x:0,y:0}, D1={x:0,y:0}, D2={x:0,y:0};
-var md=false, mLo=false, mRo=false, lR=false, rR=false;
+var md=false, mLo=false, mRo=false, lR=false, rR=false, point=false;
 var wW, wH;
 
 // // HTML Functions
@@ -181,10 +181,12 @@ function addListeners(){
 	h.rescalerR.el.onmouseover = mROver;
 	h.rescalerL.el.onmouseout = mLOut;
 	h.rescalerR.el.onmouseout = mROut;
-	document.getElementById("login").onmouseover = turnWhite1;
-	document.getElementById("signup").onmouseover = turnWhite2;	
-	document.getElementById("login").onmouseout = turnBack1;
-	document.getElementById("signup").onmouseout = turnBack2;
+	h.login.el.onmouseover = turnWhite1;
+	h.signup.el.onmouseover = turnWhite2;	
+	h.login.el.onmouseout = turnBack1;
+	h.signup.el.onmouseout = turnBack2;
+	h.logo.el.onmouseover = logoOver;
+	h.logo.el.onmouseout = logoOut;
 }
 
 
@@ -298,7 +300,10 @@ function mMove(e){
 		}
 		P0.x = P1.x;
 	}
-	if(lR||rR){
+	if(point){
+		document.body.style.cursor="pointer";
+	}
+	else if(lR||rR){
 		document.body.style.cursor="e-resize";
 	}
 	else{
@@ -312,20 +317,32 @@ window.onresize = viewDidResize;
 
 
 function turnWhite1(e){
-		document.getElementById("login").style.backgroundColor = "#fff";
-		document.getElementById("login").style.color = "#000";
+		h.login.el.style.backgroundColor = "#fff";
+		h.login.el.style.color = "#000";
+		point=true;
 }
 
 function turnWhite2(e){
-		document.getElementById("signup").style.backgroundColor = "#fff";
-		document.getElementById("signup").style.color = "#000";
+		h.signup.el.style.backgroundColor = "#fff";
+		h.signup.el.style.color = "#000";
+		point=true;
 }
 function turnBack1(e){
-		document.getElementById("login").style.backgroundColor = "rgba(0,0,0,0)";
-		document.getElementById("login").style.color = "#fff";
+		h.login.el.style.backgroundColor = "rgba(0,0,0,0)";
+		h.login.el.style.color = "#fff";
+		point=false;
 }
 
 function turnBack2(e){
-		document.getElementById("signup").style.backgroundColor = "#0776A0";
-		document.getElementById("signup").style.color = "#fff";
+		h.signup.el.style.backgroundColor = "#0776A0";
+		h.signup.el.style.color = "#fff";
+		point=false;
+}
+
+function logoOver(e){
+	point=true;
+}
+
+function logoOut(e){
+	point=false;
 }
