@@ -171,6 +171,17 @@
 	/* For IE 5.5 - 7 */
 	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='rgba(0,0,0,0.3)');
 }
+.shadowInner {
+	-moz-box-shadow: 2px 2px 1px rgba(0,0,0,0.2) inset;
+	-webkit-box-shadow: 2px 2px 1px rgba(0,0,0,0.2) inset;
+	box-shadow: 2px 2px 1px rgba(0,0,0,0.2) inset;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='rgba(0,0,0,0.2)')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='rgba(0,0,0,0.2)');
+	border: 1px solid;
+	border-color: #ddd;
+}
 
 .darken{
 	position: absolute;
@@ -195,7 +206,7 @@
 
 .inputField{
 	position: absolute;
-	top: 26%;
+	top: 21%;
 	left: 0px;
 	width: 35%;
 	height: 10%;
@@ -205,21 +216,29 @@
 }
 
 #inputField2{
-	top:46%;
+	top:41%;
 }
 
 .inputBox{
 	position: absolute;
 	right: 10%;
-	width: 50%;
+	width: 40%;
 	height: 10%;
 	font-size: 150%;
-	top: 25%;
+	top: 20%;
+	background-repeat: no-repeat;
+	background-size: 12% 100%;
+	background-position: left;
+	padding-left: 6%;
+	background-image:url(".\\Images\\user.png");
 }
 
 #inputBox2{
-	top:45%;
+	top:40%;
+	background-image:url(".\\Images\\pass.png");
 }
+
+
 
 #loginOdemia{
 	position: absolute;
@@ -275,4 +294,21 @@
 #google:hover{
 	 background-image:url(".\\Images\\googleHover.png");
 	 cursor: pointer;
+}
+
+#loginBut{
+	position: absolute;
+	right:10%;
+	top: 55%;
+	height: 8%;
+	width: 14%;
+	background-image:url(".\\Images\\login.png");
+    background-size: 100% 100%;
+	background-repeat: no-repeat;
+	border: none;
+	color: white;
+}
+
+#loginBut:hover{
+	background-image:url(".\\Images\\loginHover.png");
 }

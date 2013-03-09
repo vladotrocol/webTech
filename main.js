@@ -123,14 +123,20 @@ function initLoginEls(){
 	var topText = document.createTextNode("Log in using an Odemia account");
 	var bottomText = document.createTextNode("Or");
 
-	var top = document.createElement("div");
-	var bot = document.createElement("div");
+	var top = document.createElement("label");
+	var bot = document.createElement("label");
 
-	var user = document.createElement("div");
-	var pass = document.createElement("div");
+	var user = document.createElement("label");
+	var pass = document.createElement("label");
 
 	var fb = document.createElement("div");
 	var gp = document.createElement("div");
+
+	var submit = document.createElement("input");
+
+	submit.type="submit";
+	submit.value = "Login";
+	submit.id = "loginBut";
 
 	fb.className = "socialLogin";
 	gp.className = "socialLogin";
@@ -169,6 +175,8 @@ function initLoginEls(){
 	whiteWrap.appendChild(user);
 	whiteWrap.appendChild(pass);
 
+	whiteWrap.appendChild(submit);
+
 	whiteWrap.appendChild(username);
 	whiteWrap.appendChild(password);
 
@@ -202,7 +210,7 @@ function addEditContentWrapper(heightD, widthD){
 	inner.appendChild(newDiv);
 	var d = new htmlEl("L"+(editingEls.length+1));
 	d.init();
-	d.el.className = "wrapper shadow";
+	d.el.className = "wrapper shadowInner";
 	d.Width(widthD);
 	d.Height(heightD);
 	d.el.style.marginBottom = h.editorBox.height*5/100+"px";
