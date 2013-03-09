@@ -42,6 +42,10 @@
 	color: #ffa240;
 }
 
+#logo:hover{
+	cursor: pointer;
+}
+
 .textHolder{
 	font-family: 'Signika', sans-serif;
 	text-align: center;
@@ -51,6 +55,12 @@
 	position: absolute;
 	color: #fff;
 	background-color: #0776A0;
+}
+
+#login:hover,#signup:hover{
+	background-color: #fff;
+	cursor: pointer;
+	color: #000;
 }
 
 #login{
@@ -160,4 +170,109 @@
 	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='rgba(0,0,0,0.3)')";
 	/* For IE 5.5 - 7 */
 	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='rgba(0,0,0,0.3)');
+}
+
+.darken{
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.8);
+}
+
+.loginForm{
+	position: absolute;
+	width: 40%;
+	height: 40%;
+	top: 30%;
+	left: 30%;
+    background-image:url(".\\Images\\tile2.png");
+	background-repeat:repeat;
+	border: 3px solid;
+	border-color: #ccc;
+}
+
+.inputField{
+	position: absolute;
+	top: 26%;
+	left: 0px;
+	width: 35%;
+	height: 10%;
+	font-size: 28px;
+	text-align: right;
+	color: #555;
+}
+
+#inputField2{
+	top:46%;
+}
+
+.inputBox{
+	position: absolute;
+	right: 10%;
+	width: 50%;
+	height: 10%;
+	font-size: 150%;
+	top: 25%;
+}
+
+#inputBox2{
+	top:45%;
+}
+
+#loginOdemia{
+	position: absolute;
+	top:5%;
+	height:10%;
+	width: 80%;
+	left: 10%;
+	text-align: center;
+	/*background-color: #f00;*/
+	font-size: 130%;
+	color: #888;
+}
+
+#loginFb{
+	position: absolute;
+	top:65%;
+	height:10%;
+	width: 80%;
+	left: 10%;
+	text-align: center;
+	/*background-color: #f00;*/
+	font-size: 130%;
+	color: #888;
+
+}
+
+.socialLogin{
+	position: absolute;
+	width: 35%;
+	height: 10%;
+	top:79%;
+}
+
+#facebook{
+	left: 14%;
+    background-image:url(".\\Images\\facebook.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+#facebook:hover{
+	 background-image:url(".\\Images\\facebookHover.png");
+	 cursor: pointer;
+}
+
+#google{
+	right:14%;
+    background-image:url(".\\Images\\google.png");
+    background-size: 100% 100%;
+	background-repeat: no-repeat;
+}
+
+#google:hover{
+	 background-image:url(".\\Images\\googleHover.png");
+	 cursor: pointer;
 }

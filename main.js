@@ -15,8 +15,9 @@ var h = {
 };
 
 var P0={x:0,y:0}, P1={x:0,y:0}, D1={x:0,y:0}, D2={x:0,y:0};
-var md=false, mLo=false, mRo=false, lR=false, rR=false, point=false;
+var md=false, mLo=false, mRo=false, lR=false, rR=false;
 var wW, wH;
+var darken,whiteWrap;
 
 // // HTML Functions
 function resEl(el, t, l, h, w){
@@ -109,6 +110,77 @@ function resizeElements(){
 	resizeInjectedElements();
 }
 
+function initLoginEls(){
+	darken = document.createElement("div");
+	whiteWrap = document.createElement("div");
+
+	var username = document.createElement("input");
+	var password = document.createElement("input");
+
+	var userText = document.createTextNode("Email or username");
+	var passText = document.createTextNode("Password");
+
+	var topText = document.createTextNode("Log in using an Odemia account");
+	var bottomText = document.createTextNode("Or");
+
+	var top = document.createElement("div");
+	var bot = document.createElement("div");
+
+	var user = document.createElement("div");
+	var pass = document.createElement("div");
+
+	var fb = document.createElement("div");
+	var gp = document.createElement("div");
+
+	fb.className = "socialLogin";
+	gp.className = "socialLogin";
+
+	fb.id = "facebook";
+	gp.id = "google";
+
+	top.id = "loginOdemia";
+	bot.id = "loginFb";
+
+	user.className = "inputField";
+	pass.className = "inputField";
+	pass.id = "inputField2";
+
+	username.type = "text";
+	username.name = "username";
+	username.placeholder = "username";
+	username.className = "inputBox";
+	username.onclick = keepFocus;
+
+	password.type = "password";
+	password.name = "Password";
+	password.placeholder = "******";
+	password.className = "inputBox";
+	password.id = "inputBox2";
+	password.onclick = keepFocus;
+
+	whiteWrap.className = "loginForm";
+
+	user.appendChild(userText);
+	pass.appendChild(passText);
+
+	top.appendChild(topText);
+	bot.appendChild(bottomText);
+
+	whiteWrap.appendChild(user);
+	whiteWrap.appendChild(pass);
+
+	whiteWrap.appendChild(username);
+	whiteWrap.appendChild(password);
+
+	whiteWrap.appendChild(top);
+	whiteWrap.appendChild(bot);
+
+	whiteWrap.appendChild(fb);
+	whiteWrap.appendChild(gp);
+
+	darken.className = "darken";
+	darken.onclick = removeDarken;
+}
 
 function initHtml(){
 	initElements();
@@ -116,6 +188,7 @@ function initHtml(){
 	initSizeHtml();
 	generateSeparators(3);
 	addEditContentWrappers();
+	initLoginEls();
 }
 
 //Adding content
@@ -181,12 +254,7 @@ function addListeners(){
 	h.rescalerR.el.onmouseover = mROver;
 	h.rescalerL.el.onmouseout = mLOut;
 	h.rescalerR.el.onmouseout = mROut;
-	h.login.el.onmouseover = turnWhite1;
-	h.signup.el.onmouseover = turnWhite2;	
-	h.login.el.onmouseout = turnBack1;
-	h.signup.el.onmouseout = turnBack2;
-	h.logo.el.onmouseover = logoOver;
-	h.logo.el.onmouseout = logoOut;
+	h.login.el.onclick= openLoginWindow;
 }
 
 
@@ -300,10 +368,7 @@ function mMove(e){
 		}
 		P0.x = P1.x;
 	}
-	if(point){
-		document.body.style.cursor="pointer";
-	}
-	else if(lR||rR){
+	 if(lR||rR){
 		document.body.style.cursor="e-resize";
 	}
 	else{
@@ -315,34 +380,16 @@ function mMove(e){
 window.onload = viewDidLoad;
 window.onresize = viewDidResize;
 
-
-function turnWhite1(e){
-		h.login.el.style.backgroundColor = "#fff";
-		h.login.el.style.color = "#000";
-		point=true;
+function openLoginWindow(e){
+	document.body.appendChild(darken);
+	document.body.appendChild(whiteWrap);
 }
 
-function turnWhite2(e){
-		h.signup.el.style.backgroundColor = "#fff";
-		h.signup.el.style.color = "#000";
-		point=true;
-}
-function turnBack1(e){
-		h.login.el.style.backgroundColor = "rgba(0,0,0,0)";
-		h.login.el.style.color = "#fff";
-		point=false;
+function removeDarken(e){
+	darken.parentNode.removeChild(darken);
+	whiteWrap.parentNode.removeChild(whiteWrap);
 }
 
-function turnBack2(e){
-		h.signup.el.style.backgroundColor = "#0776A0";
-		h.signup.el.style.color = "#fff";
-		point=false;
-}
+function keepFocus(e){
 
-function logoOver(e){
-	point=true;
-}
-
-function logoOut(e){
-	point=false;
 }
