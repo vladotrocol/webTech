@@ -14,6 +14,8 @@ var h = {
 	login: "login"
 };
 
+var l =  new Array();
+
 var P0={x:0,y:0}, P1={x:0,y:0}, D1={x:0,y:0}, D2={x:0,y:0};
 var md=false, mLo=false, mRo=false, lR=false, rR=false;
 var wW, wH;
@@ -93,6 +95,7 @@ function resizeFonts(){
 	h.logo.Font(h.logo.initFont*window.innerHeight/wH);
 	h.centeredText.Font(h.centeredText.initFont*window.innerHeight/wH);
 	h.centeredText2.Font(h.centeredText.initFont*window.innerHeight/wH);
+	resizeFormFonts();
 }
 
 function resizeElements(){
@@ -104,9 +107,14 @@ function resizeElements(){
 		if(window.innerHeight>480){
 			h[el].Height(h[el].initHeight*window.innerHeight/wH);
 			h[el].Top(h[el].initTop*window.innerHeight/wH);
-			resizeFonts();
+			
 		}
 	}
+
+	if(window.innerHeight>480){
+		resizeFonts();
+	}
+
 	resizeInjectedElements();
 }
 
@@ -134,6 +142,22 @@ function initLoginEls(){
 
 	var submit = document.createElement("input");
 
+	top.style.fontSize = h.logo.font*2/3+"px";
+	bot.style.fontSize = h.logo.font*2/3+"px";
+	user.style.fontSize = h.logo.font*3/4+"px";
+	pass.style.fontSize = h.logo.font*3/4+"px";
+	username.style.fontSize = h.logo.font+"px";
+	password.style.fontSize = h.logo.font+"px";
+	submit.style.fontSize = h.logo.font/2+"px";
+
+	l.push({id:"user", el: user, initFont:parseInt(user.style.fontSize.split()[0],10)});
+	l.push({id:"pass", el: pass, initFont:parseInt(pass.style.fontSize.split()[0],10)});
+	l.push({id:"top", el: top, initFont:parseInt(top.style.fontSize.split()[0],10)});
+	l.push({id:"bot", el: bot, initFont:parseInt(bot.style.fontSize.split()[0],10)});
+	l.push({id:"username", el: username, initFont:parseInt(username.style.fontSize.split()[0],10)});
+	l.push({id:"password", el: password, initFont:parseInt(password.style.fontSize.split()[0],10)});
+	l.push({id:"submit", el: submit, initFont:parseInt(submit.style.fontSize.split()[0],10)});
+
 	submit.type="submit";
 	submit.value = "Login";
 	submit.id = "loginBut";
@@ -147,22 +171,19 @@ function initLoginEls(){
 	top.id = "loginOdemia";
 	bot.id = "loginFb";
 
-	user.className = "inputField";
-	pass.className = "inputField";
+	user.id = "inputField";
 	pass.id = "inputField2";
 
 	username.type = "text";
 	username.name = "username";
 	username.placeholder = "username";
 	username.className = "inputBox";
-	username.onclick = keepFocus;
 
 	password.type = "password";
 	password.name = "Password";
 	password.placeholder = "******";
 	password.className = "inputBox";
 	password.id = "inputBox2";
-	password.onclick = keepFocus;
 
 	whiteWrap.className = "loginForm";
 
@@ -188,6 +209,16 @@ function initLoginEls(){
 
 	darken.className = "darken";
 	darken.onclick = removeDarken;
+	submit.onclick=removeDarken;
+	fb.onclick = removeDarken;
+	gp.onclick = removeDarken;
+}
+
+
+function resizeFormFonts(){
+	for(var i in l){
+		l[i].el.style.fontSize = (l[i].initFont*window.innerHeight/wH)+"px";
+	}
 }
 
 function initHtml(){
@@ -203,21 +234,34 @@ function initHtml(){
 
 var editingEls=new Array();
 //Left side
-function addEditContentWrapper(heightD, widthD){
+function addEditContentWrapper(heightD, widthD, a, font){
 	var newDiv = document.createElement("div");
 	var inner = document.getElementById("innerE");
 	newDiv.id = "L"+(editingEls.length+1);
 	inner.appendChild(newDiv);
 	var d = new htmlEl("L"+(editingEls.length+1));
 	d.init();
-	d.el.className = "wrapper shadowInner";
+	if(a){
+		d.el.className = "wrapperAlpha";
+	}
+	else{
+		d.el.className = "wrapper shadowInner";
+	}
 	d.Width(widthD);
 	d.Height(heightD);
-	d.el.style.marginBottom = h.editorBox.height*5/100+"px";
+	d.el.style.marginTop = h.editorBox.height*2/100+"px";
 	d.initSize();
 	d.Width(widthD*h.editorBox.width/100);
 	d.Height(heightD*h.editorBox.height/100);
+	if(font==-1){
+		d.Font(d.height*2/3);
+	}
+	else{
+		d.Font(d.height*font/100);
+	}
+	d.initFont = d.font;
 	editingEls.push(d);
+	l.push({id:"L"+(editingEls.length+1), el: d.el, initFont:d.initFont});
 }
 
 function computeMaxHolderWidth(){
@@ -230,10 +274,35 @@ function computeMaxHolderWidth(){
 	document.getElementById("innerE").style.width=max+"px";
 }
 
+function addTextTo(s, i, c, w){
+	var t = document.createTextNode(s);
+	var cen = document.createElement("div");
+	cen.className = "vCenter";
+	// cen.style.backgroundColor = "#f00";
+	cen.appendChild(t);
+	cen.style.color=c;	
+	editingEls[i].el.appendChild(cen);
+	editingEls[i].el.style.display="table";	
+	editingEls[i].el.style.textAlign="center";		
+}
+
+function addInput(p,i,w){
+	var inn = document.createElement("input");
+	inn.name = p;
+	inn.placeholder =p;
+	inn.size = w;
+	inn.style.height = editingEls[i].height+ "px";
+	editingEls[i].el.appendChild(inn);
+}
+
 function addEditContentWrappers(){
-	addEditContentWrapper(10, 81);
-	addEditContentWrapper(5, 70);
-	addEditContentWrapper(30, 81);
+	addEditContentWrapper(5, 81, true, -1);
+	addTextTo("Edit Your Question", 0, "#009b95");
+	addEditContentWrapper(5, 81, true, 50);
+	addTextTo("Header:", 1, "#888");
+	addInput("my header",1,30);
+	addEditContentWrapper(45, 81,false, 2);
+	addEditContentWrapper(30, 81,false, 2);
 	computeMaxHolderWidth();
 }
 
@@ -241,11 +310,14 @@ function resizeEditContentWrappers(){
 	for(var el in editingEls){
 		if(window.innerWidth>640){
 			editingEls[el].Width(editingEls[el].initWidth*h.editorBox.width/100);
-			editingEls[el].el.style.marginBottom = h.editorBox.height*5/100+"px";
 		}
 		if(window.innerHeight>480){
 			editingEls[el].Height(editingEls[el].initHeight*h.editorBox.height/100);
-			editingEls[el].el.style.marginBottom = h.editorBox.height*5/100+"px";
+
+		}
+		if(window.innerWidth>640&&window.innerHeight>480){
+			editingEls[el].el.style.marginTop = h.editorBox.height*2/100+"px";
+			editingEls[el].el.style.marginBottom = h.editorBox.height*1/200+"px";
 		}
 	}
 }
@@ -396,8 +468,4 @@ function openLoginWindow(e){
 function removeDarken(e){
 	darken.parentNode.removeChild(darken);
 	whiteWrap.parentNode.removeChild(whiteWrap);
-}
-
-function keepFocus(e){
-
 }

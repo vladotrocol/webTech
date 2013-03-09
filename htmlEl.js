@@ -27,6 +27,10 @@ htmlEl.prototype.initSize = function(){
 	this.initFont = this.font;
 };
 
+htmlEl.prototype.initFontSize = function(){
+	this.initFont = this.font;
+};
+
 htmlEl.prototype.Top = function(t){
 	this.top = t;
 	this.el.style.top = t + "px";
