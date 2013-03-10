@@ -33,6 +33,10 @@
     -o-user-select: none; 
 }
 
+.hiddenOverflow{
+	overflow-x: hidden;
+}
+
 #topBar{
 	position: absolute;
     background-image:url(".\\Images\\tile3.png");
@@ -359,6 +363,10 @@
 	display: table-cell;
 	vertical-align: middle;
 	text-align: center;
-	/*//background: #00f;*/
 	color: #777;
+}
+
+.option:hover{
+	background-color: rgba(0,0,0,0.4);
+	color: #fff;
 }

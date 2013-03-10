@@ -110,12 +110,22 @@ function sizeElements(){
 
 function resizeInjectedElements(){
 	var seps = document.getElementsByClassName("lineSeparator");
+	var ops = document.getElementsByClassName("option");
 	for(var i=0; i<seps.length;i++){
 		if(window.innerHeight>480){
 			seps[i].style.top = ((i+1)*h.topBar.height) + "px";
 		}
 		if(window.innerWidth>640){
 			seps[i].style.width = (parseInt(h.sideBar.width,10)-3)+"px";
+		}
+	}
+	for(var i=0; i<ops.length;i++){
+		if(window.innerHeight>480){
+			ops[i].style.top = ((i)*h.topBar.height*window.innerWidth/wW) + "px";
+			ops[i].style.height = h.topBar.height*window.innerWidth/wW +"px";
+		}
+		if(window.innerWidth>640){
+			ops[i].style.width = (h.sideBar.width-2)+"px";
 		}
 	}
 }
@@ -127,8 +137,8 @@ function resizeContents(){
 	resEl(h.pTable, 0, 2, 0, h.canvasHolder.width-2);
 	resEl(h.eText, 0, 0, h.editHolder.height/10, h.editHolder.width-9);
 	resEl(h.eHeaderInput, 0, 0, h.editHolder.height/20, h.editHolder.width-9);
-	resEl(h.q1, 0, 0, h.editHolder.height/10, h.editHolder.width/6);
-	resEl(h.q2, 0, 0, h.editHolder.height/10, h.editHolder.width/6);
+	resEl(h.q1, 0, 0, h.editHolder.height/10, h.editHolder.height/10);
+	resEl(h.q2, 0, 0, h.editHolder.height/10, h.editHolder.height/10);
 	resize_canvas(h.pCanvas, h.previewBox.width*9/10-10,  h.sideBar.height*9/10*11/12);
 }
 
