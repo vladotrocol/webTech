@@ -171,6 +171,7 @@ function resizeContents(){
 function resizeFonts(){
 	h.logo.Font(h.logo.initFont*window.innerHeight/wH);
 	h.centeredText.Font(h.centeredText.initFont*window.innerHeight/wH);
+	h.centeredText2.Font(h.centeredText2.initFont*window.innerHeight/wH);
 	resizeContentFonts();
 	resizeFormFonts();
 }

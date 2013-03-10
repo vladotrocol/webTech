@@ -351,8 +351,8 @@
 }
 
 .dark{
-	background-color: rgba(14,81,167,0.5); 
-	color: #ddd;
+	background-color: #ddf; 
+	color: #6A8DB3;
 }
 
 .dark:focus{
