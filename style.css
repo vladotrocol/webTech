@@ -116,9 +116,6 @@
 	position: relative;
    	margin-left: auto;
    	margin-right: auto;
-   	top: 2.5%;
-	width: 90%;
-	height: 95%;
     background-image:url(".\\Images\\tile2.png");
 	background-repeat:repeat;
 	overflow: auto;
@@ -129,47 +126,36 @@
 	font-family: 'Signika', sans-serif;
 }
 
-.wrapperAlpha{
-	border: 1px solid;
-	border-color: #eee;
+.wrapperBorder{
+	border-bottom: 1px solid;
+	border-color: #ddd;
 	font-family: 'Signika', sans-serif;
 }
 
-#outer {
-	height: 100%; 
-	width: 100%;
-	overflow: hidden; 
-	position: relative;
-}
-
-#outer[id] {
-	display: table;
- 	position: static;
-}
-
-/* for quirk explorer only*/
-#middle {
-	position: absolute;
-	top: 50%;
-	width: 100%;
+.allCenter{
+	display: table-cell;
 	text-align: center;
-	} 
+	vertical-align: middle;
+}
 
-#middle[id] {
+.vCenter{
 	display: table-cell;
 	vertical-align: middle;
-	width: 100%;
-	position: static;
 }
 
-/* for quirk explorer only */
-#innerE {
-	position: relative;
-	top: -50%;
-	margin-left: auto;
-	margin-right: auto;
-	text-align: left;
-} 
+.tables{
+	border: none;
+	color: #888;
+}
+
+#eTitle,#pTitle{
+	color: #00A67C;
+}
+
+.empty{
+	padding: 0px;
+	border: 0px;
+}
 
 .shadow {
 	-moz-box-shadow: 3px 3px 4px rgba(0,0,0,0.5);
@@ -356,7 +342,23 @@
 	background-repeat: no-repeat;
 }
 
-.vCenter{
+.noResize{
+	resize:none;
+}
+
+.dark{
+	background-color: rgba(14,81,167,0.5); 
+	color: #ddd;
+}
+
+.dark:focus{
+	outline-color: #fff;
+}
+
+.option{
 	display: table-cell;
 	vertical-align: middle;
+	text-align: center;
+	/*//background: #00f;*/
+	color: #777;
 }

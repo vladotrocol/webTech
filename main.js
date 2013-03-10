@@ -11,10 +11,25 @@ var h = {
 	signup: "signup",
 	centeredText: "centeredText",
 	centeredText2: "centeredText2",
-	login: "login"
+	login: "login",
+	eTable: "eTable",
+	editHolder: "editHolder",
+	canvasHolder: "canvasHolder",
+	eTitle: "eTitle",
+	pTitle: "pTitle",
+	pTable: "pTable",
+	eHeader: "eHeader",
+	eText: "eText",
+	eHeaderInput: "eHeaderInput",
+	pCanvas: "pCanvas",
+	q1: "q1",
+	q2: "q2"
 };
 
+var options = ["Play", "Add Question", "Account"];
+
 var l =  new Array();
+var Preview;
 
 var P0={x:0,y:0}, P1={x:0,y:0}, D1={x:0,y:0}, D2={x:0,y:0};
 var md=false, mLo=false, mRo=false, lR=false, rR=false;
@@ -50,6 +65,13 @@ function generateSeparators(n){
 	for(var i=0;i<n;i++){
 
 		var newSeparator=document.createElement("img");
+		var option = document.createElement("div");
+		var txt = document.createTextNode(options[i]);
+		option.appendChild(txt);
+		option.style.top = ((i)*h.topBar.height*window.innerWidth/wW) + "px";
+		option.style.width = (h.sideBar.width-2)+"px";
+		option.style.height = h.topBar.height*window.innerWidth/wW +"px";
+		option.className = "option";
 
 		newSeparator.src = ".\\Images\\separator.png";
 		newSeparator.style.top = ((i+1)*h.topBar.height*window.innerWidth/wW) + "px";
@@ -58,6 +80,7 @@ function generateSeparators(n){
 		newSeparator.className = "lineSeparator";
 
 		h.sideBar.el.appendChild(newSeparator);
+		h.sideBar.el.appendChild(option);
 	}
 }
 
@@ -74,9 +97,15 @@ function sizeElements(){
 	resEl(h.login, 0, h.topBar.width-h.sideBar.width*7/6, h.topBar.height, h.sideBar.width/2);
 	resEl(h.centeredText, h.topBar.height/3, 0, 0, h.sideBar.width/2);
 	resEl(h.centeredText2, h.topBar.height/3, 0, 0, h.sideBar.width/2);
+
 	h.logo.Font(h.topBar.height*2/3);
 	h.centeredText.Font(h.topBar.height/3);
 	h.centeredText2.Font(h.topBar.height/3);
+	h.eTitle.Font(h.topBar.height*4/5);
+	h.pTitle.Font(h.topBar.height*4/5);
+	h.eHeader.Font(h.topBar.height*3/7);
+	h.eHeaderInput.Font(h.editHolder.height/2-2);
+	resizeContents();
 }
 
 function resizeInjectedElements(){
@@ -91,11 +120,29 @@ function resizeInjectedElements(){
 	}
 }
 
+function resizeContents(){
+	resEl(h.editHolder, h.sideBar.height*1/20, 0, h.sideBar.height*9/10, h.editorBox.width*9/10);
+	resEl(h.canvasHolder, h.sideBar.height*1/20, 0, h.sideBar.height*9/10, h.previewBox.width*9/10);
+	resEl(h.eTable, 0, 2, 0, h.editHolder.width-2);
+	resEl(h.pTable, 0, 2, 0, h.canvasHolder.width-2);
+	resEl(h.eText, 0, 0, h.editHolder.height/10, h.editHolder.width-9);
+	resEl(h.eHeaderInput, 0, 0, h.editHolder.height/20, h.editHolder.width-9);
+	resEl(h.q1, 0, 0, h.editHolder.height/10, h.editHolder.width/6);
+	resEl(h.q2, 0, 0, h.editHolder.height/10, h.editHolder.width/6);
+	resize_canvas(h.pCanvas, h.previewBox.width*9/10-10,  h.sideBar.height*9/10*11/12);
+}
+
 function resizeFonts(){
 	h.logo.Font(h.logo.initFont*window.innerHeight/wH);
 	h.centeredText.Font(h.centeredText.initFont*window.innerHeight/wH);
-	h.centeredText2.Font(h.centeredText.initFont*window.innerHeight/wH);
+	resizeContentFonts();
 	resizeFormFonts();
+}
+
+function resizeContentFonts(){
+	h.eTitle.Font(h.eTitle.initFont*window.innerHeight/wH);
+	h.pTitle.Font(h.pTitle.initFont*window.innerHeight/wH);
+	h.eHeader.Font(h.eHeader.initFont*window.innerHeight/wH);
 }
 
 function resizeElements(){
@@ -107,14 +154,13 @@ function resizeElements(){
 		if(window.innerHeight>480){
 			h[el].Height(h[el].initHeight*window.innerHeight/wH);
 			h[el].Top(h[el].initTop*window.innerHeight/wH);
-			
 		}
 	}
 
 	if(window.innerHeight>480){
 		resizeFonts();
 	}
-
+		initcanvas();
 	resizeInjectedElements();
 }
 
@@ -221,107 +267,26 @@ function resizeFormFonts(){
 	}
 }
 
+function initcanvas(){
+	Preview = new CanvasObj(h.pCanvas.el, 0, 0, h.canvasHolder.width-10,h.canvasHolder.height*11/12,"#00b");
+	var header = new T(2, 2, h.topBar.height*3/7, "my header", "#ccc","left");
+	var questionbody = new T(Preview.w/2, Preview.h/2, h.topBar.height*3/7, "my question","#777", "center");
+	var im = new I(Preview.w/3, Preview.h/10, Preview.w/3, Preview.h/3, images["q1"]);
+	Preview.add_shape(header);
+	Preview.add_shape(questionbody);
+	Preview.add_shape(im);
+	Preview.draw();
+}
+
 function initHtml(){
 	initElements();
 	sizeElements();
 	initSizeHtml();
 	generateSeparators(3);
-	addEditContentWrappers();
 	initLoginEls();
+	load_images(image_sources, function(images){});
+	initcanvas();
 }
-
-//Adding content
-
-var editingEls=new Array();
-//Left side
-function addEditContentWrapper(heightD, widthD, a, font){
-	var newDiv = document.createElement("div");
-	var inner = document.getElementById("innerE");
-	newDiv.id = "L"+(editingEls.length+1);
-	inner.appendChild(newDiv);
-	var d = new htmlEl("L"+(editingEls.length+1));
-	d.init();
-	if(a){
-		d.el.className = "wrapperAlpha";
-	}
-	else{
-		d.el.className = "wrapper shadowInner";
-	}
-	d.Width(widthD);
-	d.Height(heightD);
-	d.el.style.marginTop = h.editorBox.height*2/100+"px";
-	d.initSize();
-	d.Width(widthD*h.editorBox.width/100);
-	d.Height(heightD*h.editorBox.height/100);
-	if(font==-1){
-		d.Font(d.height*2/3);
-	}
-	else{
-		d.Font(d.height*font/100);
-	}
-	d.initFont = d.font;
-	editingEls.push(d);
-	l.push({id:"L"+(editingEls.length+1), el: d.el, initFont:d.initFont});
-}
-
-function computeMaxHolderWidth(){
-	var max=0;
-	for(var el in editingEls){
-		if(editingEls[el].width>max){
-			max=editingEls[el].width;
-		}
-	}
-	document.getElementById("innerE").style.width=max+"px";
-}
-
-function addTextTo(s, i, c, w){
-	var t = document.createTextNode(s);
-	var cen = document.createElement("div");
-	cen.className = "vCenter";
-	// cen.style.backgroundColor = "#f00";
-	cen.appendChild(t);
-	cen.style.color=c;	
-	editingEls[i].el.appendChild(cen);
-	editingEls[i].el.style.display="table";	
-	editingEls[i].el.style.textAlign="center";		
-}
-
-function addInput(p,i,w){
-	var inn = document.createElement("input");
-	inn.name = p;
-	inn.placeholder =p;
-	inn.size = w;
-	inn.style.height = editingEls[i].height+ "px";
-	editingEls[i].el.appendChild(inn);
-}
-
-function addEditContentWrappers(){
-	addEditContentWrapper(5, 81, true, -1);
-	addTextTo("Edit Your Question", 0, "#009b95");
-	addEditContentWrapper(5, 81, true, 50);
-	addTextTo("Header:", 1, "#888");
-	addInput("my header",1,30);
-	addEditContentWrapper(45, 81,false, 2);
-	addEditContentWrapper(30, 81,false, 2);
-	computeMaxHolderWidth();
-}
-
-function resizeEditContentWrappers(){
-	for(var el in editingEls){
-		if(window.innerWidth>640){
-			editingEls[el].Width(editingEls[el].initWidth*h.editorBox.width/100);
-		}
-		if(window.innerHeight>480){
-			editingEls[el].Height(editingEls[el].initHeight*h.editorBox.height/100);
-
-		}
-		if(window.innerWidth>640&&window.innerHeight>480){
-			editingEls[el].el.style.marginTop = h.editorBox.height*2/100+"px";
-			editingEls[el].el.style.marginBottom = h.editorBox.height*1/200+"px";
-		}
-	}
-}
-
 
 
 //Listener functions
@@ -335,6 +300,8 @@ function addListeners(){
 	h.rescalerL.el.onmouseout = mLOut;
 	h.rescalerR.el.onmouseout = mROut;
 	h.login.el.onclick= openLoginWindow;
+	h.eHeaderInput.el.onkeyup = updateCanvasHeader;
+	h.eText.el.onkeyup = updateCanvasBody;
 }
 
 
@@ -347,8 +314,6 @@ function viewDidLoad(){
 
 function viewDidResize(){
 	resizeElements();
-	resizeEditContentWrappers();
-	computeMaxHolderWidth();
 }
 
 function setNewRPos(){
@@ -370,8 +335,8 @@ function resizeLHtml(){
 		h.editorBox.Left(h.editorBox.left+D1.x);
 		h.editorBox.Width(h.editorBox.width-D1.x);
 		resizeInjectedElements();
-		resizeEditContentWrappers();
-		computeMaxHolderWidth();
+		resizeContents();
+
 	}
 }
 
@@ -382,8 +347,8 @@ function resizeRHtml(){
 		h.previewBox.Left(h.previewBox.left+D2.x);
 		h.previewBox.Width(h.previewBox.width-D2.x);
 		resizeInjectedElements();
-		resizeEditContentWrappers();
-		computeMaxHolderWidth();
+		resizeContents();
+		initcanvas();
 	}
 }
 
@@ -468,4 +433,16 @@ function openLoginWindow(e){
 function removeDarken(e){
 	darken.parentNode.removeChild(darken);
 	whiteWrap.parentNode.removeChild(whiteWrap);
+}
+
+function updateCanvasHeader(e){
+	Preview.objects[0].text = h.eHeaderInput.el.value;
+	Preview.ctx.clearRect(0,0,Preview.w, Preview.h);
+	Preview.draw();
+}
+
+function updateCanvasBody(e){
+	Preview.objects[1].text = h.eText.el.value;
+	Preview.ctx.clearRect(0,0,Preview.w, Preview.h);
+	Preview.draw();
 }

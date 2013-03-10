@@ -8,7 +8,7 @@
 			<script type="text/javascript" src="htmlEl.js"></script>
 			<script type="text/javascript" src="lib.js"></script>
 			<script type="text/javascript" src="main.js"></script>
-			<script type="text/javascript" src="interactive.js"></script>
+			<script type="text/javascript" src="prevcanvas.js"></script>
 		<!-- StyleSheets -->
 			<link rel="stylesheet" type="text/css" href="style.css"/>
 		<!-- Fonts -->
@@ -20,19 +20,78 @@
 		<div id = "cWrapper">
 			<div id = "editorBox" class ="mainPanel">
 				<div id="editHolder" class="holder shadow">
-					<div id="outer">
-					  <div id="middle">
-					    <div id="innerE">
-					    </div>
-					  </div>
-					</div>
+					<table class="tables" id="eTable">
+						<tr>
+							<td id = "eTitle" class = "wrapperBorder allCenter">
+								Edit Your Question
+							</td>
+						</tr>
+						<tr>
+							<td id = "eHeader" class = "wrapperBorder vCenter">
+								Header
+							</td>
+						</tr>
+						<tr>
+							<td id = "eHeader" class = "wrapperBorder">
+								<textarea class = "empty noResize dark" id="eHeaderInput" spellcheck="false"></textarea>
+							</td>
+						</tr>
+						<tr>
+							<td id = "eHeader" class = "wrapperBorder vCenter">
+								Add Media
+							</td>
+						</tr>
+						<tr>
+							<td id = "eHeader" class = "wrapper shadowInner">
+								<img src="Images\q1.jpg" id = "q1"></img>
+								<img src="Images\q2.png" id = "q2"></img>
+							</td>
+						</tr>
+						<tr>
+							<td id = "eHeader" class = "wrapperBorder vCenter">
+								Question Text
+							</td>
+						</tr>
+						<tr>
+							<td id = "eHeader" class = "wrapperBorder shadowInner">
+								<textarea class="empty dark" id="eText" spellcheck="false"></textarea>
+							</td>
+						</tr>
+						<td id = "eHeader" class = "wrapperBorder vCenter">
+								Add Answers
+							</td>
+						</tr>
+						<tr>
+							<td id = "eHeader" class = "wrapper shadowInner">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+								quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+								consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+								cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+								proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+							</td>
+						</tr>
+					</table>
 				</div>
 			</div>
 			<div id="rescalerR">
 				<div class="rescaleIcon"></div>
 			</div>
 			<div id = "previewBox" class = "mainPanel">
-				<div id="canvasHolder" class="holder shadow"></div>
+				<div id="canvasHolder" class="holder shadow">
+					<table class="tables" id="pTable">
+						<tr>
+							<td id = "pTitle" class = "wrapperBorder allCenter">
+								Preview
+							</td>
+						</tr>
+						<tr>
+							<td id = "canvas" class = "empty">
+								<canvas id = "pCanvas">Your browser does not support canvas</canvas>
+							</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 			<div id="sideBar">
 			</div>
