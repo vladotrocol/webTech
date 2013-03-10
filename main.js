@@ -19,14 +19,20 @@ var h = {
 	pTitle: "pTitle",
 	pTable: "pTable",
 	eHeader: "eHeader",
+	eMedia: "eMedia",
+	eQuestion: "eQuestion",
+	eAnswers: "eAnswers",
 	eText: "eText",
 	eHeaderInput: "eHeaderInput",
 	pCanvas: "pCanvas",
 	q1: "q1",
-	q2: "q2"
+	q2: "q2",
+	eInsertAnswer: "eInsertAnswer",
+	playWrapper	: "playWrapper"
 };
 
 var options = ["Play", "Add Question", "Account"];
+var answers = [];
 
 var l =  new Array();
 var Preview;
@@ -71,7 +77,9 @@ function generateSeparators(n){
 		option.style.top = ((i)*h.topBar.height*window.innerWidth/wW) + "px";
 		option.style.width = (h.sideBar.width-2)+"px";
 		option.style.height = h.topBar.height*window.innerWidth/wW +"px";
+		option.style.fontSize = h.topBar.height/3+"px";
 		option.className = "option";
+		option.id = "O"+(i+1); 
 
 		newSeparator.src = ".\\Images\\separator.png";
 		newSeparator.style.top = ((i+1)*h.topBar.height*window.innerWidth/wW) + "px";
@@ -82,7 +90,18 @@ function generateSeparators(n){
 		h.sideBar.el.appendChild(newSeparator);
 		h.sideBar.el.appendChild(option);
 	}
+	document.getElementById("O1").onclick = play;
+	document.getElementById("O2").onclick = edit;
 }
+
+function play(e){
+	h.playWrapper.el.style.display = "block";
+}
+
+function edit(e){
+	h.playWrapper.el.style.display = "none";
+}
+
 
 function sizeElements(){
 	resEl(h.topBar, 0, 0, window.innerHeight/20+1, window.innerWidth);
@@ -97,6 +116,7 @@ function sizeElements(){
 	resEl(h.login, 0, h.topBar.width-h.sideBar.width*7/6, h.topBar.height, h.sideBar.width/2);
 	resEl(h.centeredText, h.topBar.height/3, 0, 0, h.sideBar.width/2);
 	resEl(h.centeredText2, h.topBar.height/3, 0, 0, h.sideBar.width/2);
+	resEl(h.playWrapper, h.topBar.height-1, h.sideBar.width, window.innerHeight-h.topBar.height, window.innerWidth-h.sideBar.width);
 
 	h.logo.Font(h.topBar.height*2/3);
 	h.centeredText.Font(h.topBar.height/3);
@@ -104,7 +124,11 @@ function sizeElements(){
 	h.eTitle.Font(h.topBar.height*4/5);
 	h.pTitle.Font(h.topBar.height*4/5);
 	h.eHeader.Font(h.topBar.height*3/7);
-	h.eHeaderInput.Font(h.editHolder.height/2-2);
+	h.eMedia.Font(h.topBar.height*3/7);
+	h.eQuestion.Font(h.topBar.height*3/7);
+	h.eAnswers.Font(h.topBar.height*3/7);
+	h.eHeaderInput.Font(h.topBar.height*2/3);
+	h.eInsertAnswer.Font(h.topBar.height*2/3);
 	resizeContents();
 }
 
@@ -121,8 +145,9 @@ function resizeInjectedElements(){
 	}
 	for(var i=0; i<ops.length;i++){
 		if(window.innerHeight>480){
-			ops[i].style.top = ((i)*h.topBar.height*window.innerWidth/wW) + "px";
-			ops[i].style.height = h.topBar.height*window.innerWidth/wW +"px";
+			ops[i].style.top = ((i)*h.topBar.height) + "px";
+			ops[i].style.height = h.topBar.height +"px";
+			ops[i].style.fontSize = h.topBar.height/3+"px";
 		}
 		if(window.innerWidth>640){
 			ops[i].style.width = (h.sideBar.width-2)+"px";
@@ -135,8 +160,9 @@ function resizeContents(){
 	resEl(h.canvasHolder, h.sideBar.height*1/20, 0, h.sideBar.height*9/10, h.previewBox.width*9/10);
 	resEl(h.eTable, 0, 2, 0, h.editHolder.width-2);
 	resEl(h.pTable, 0, 2, 0, h.canvasHolder.width-2);
-	resEl(h.eText, 0, 0, h.editHolder.height/10, h.editHolder.width-9);
+	resEl(h.eText, 0, 10, h.editHolder.height/10, h.editHolder.width-10);
 	resEl(h.eHeaderInput, 0, 0, h.editHolder.height/20, h.editHolder.width-9);
+	resEl(h.eInsertAnswer, 0, 0, h.editHolder.height/20, h.editHolder.width-9);
 	resEl(h.q1, 0, 0, h.editHolder.height/10, h.editHolder.height/10);
 	resEl(h.q2, 0, 0, h.editHolder.height/10, h.editHolder.height/10);
 	resize_canvas(h.pCanvas, h.previewBox.width*9/10-10,  h.sideBar.height*9/10*11/12);
@@ -152,25 +178,36 @@ function resizeFonts(){
 function resizeContentFonts(){
 	h.eTitle.Font(h.eTitle.initFont*window.innerHeight/wH);
 	h.pTitle.Font(h.pTitle.initFont*window.innerHeight/wH);
-	h.eHeader.Font(h.eHeader.initFont*window.innerHeight/wH);
+	h.eMedia.Font(h.eHeader.initFont*window.innerHeight/wH);
+	h.eQuestion.Font(h.eHeader.initFont*window.innerHeight/wH);
+	h.eAnswers.Font(h.eHeader.initFont*window.innerHeight/wH);
+	h.eHeaderInput.Font(h.topBar.height*2/3);
+}
+
+function resizeEAnswers(){
+	for(var i in answers){
+
+	}
 }
 
 function resizeElements(){
 	for(var el in h){
-		if(window.innerWidth>640){
-			h[el].Width(h[el].initWidth*window.innerWidth/wW);
-			h[el].Left(h[el].initLeft*window.innerWidth/wW);
-		}
-		if(window.innerHeight>480){
-			h[el].Height(h[el].initHeight*window.innerHeight/wH);
-			h[el].Top(h[el].initTop*window.innerHeight/wH);
+		if(el!="pCanvas"){
+			if(window.innerWidth>640){
+				h[el].Width(h[el].initWidth*window.innerWidth/wW);
+				h[el].Left(h[el].initLeft*window.innerWidth/wW);
+			}
+			if(window.innerHeight>480){
+				h[el].Height(h[el].initHeight*window.innerHeight/wH);
+				h[el].Top(h[el].initTop*window.innerHeight/wH);
+			}
 		}
 	}
 
 	if(window.innerHeight>480){
 		resizeFonts();
 	}
-		initcanvas();
+	initcanvas();
 	resizeInjectedElements();
 }
 
@@ -279,8 +316,8 @@ function resizeFormFonts(){
 
 function initcanvas(){
 	Preview = new CanvasObj(h.pCanvas.el, 0, 0, h.canvasHolder.width-10,h.canvasHolder.height*11/12,"#00b");
-	var header = new T(2, 2, h.topBar.height*3/7, "my header", "#ccc","left");
-	var questionbody = new T(Preview.w/2, Preview.h/2, h.topBar.height*3/7, "my question","#777", "center");
+	var header = new T(2, 2, h.topBar.height*3/7, h.eHeaderInput.el.value, "#ccc","left");
+	var questionbody = new T(Preview.w/2, Preview.h/2, h.topBar.height*3/7, h.eText.el.value,"#777", "center");
 	var im = new I(Preview.w/3, Preview.h/10, Preview.w/3, Preview.h/3, images["q1"]);
 	Preview.add_shape(header);
 	Preview.add_shape(questionbody);
@@ -342,6 +379,7 @@ function resizeLHtml(){
 	if(h.rescalerL.left+D1.x>1&&h.rescalerL.left+D1.x<h.rescalerR.left-h.rescalerR.width-1){
 		h.rescalerL.Left(h.rescalerL.left+D1.x);
 		h.sideBar.Width(h.sideBar.width+D1.x);
+		h.playWrapper.Width(h.playWrapper.width+D1.x);
 		h.editorBox.Left(h.editorBox.left+D1.x);
 		h.editorBox.Width(h.editorBox.width-D1.x);
 		resizeInjectedElements();

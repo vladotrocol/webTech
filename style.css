@@ -369,4 +369,16 @@
 .option:hover{
 	background-color: rgba(0,0,0,0.4);
 	color: #fff;
+	cursor: pointer;
+}
+
+.leftMargin{
+	padding-left: 10px;
+}
+
+.backWrapper{
+	position: absolute;
+	background-image:url(".\\Images\\tile5.png");
+	background-repeat:repeat;
+	display: none;
 }
