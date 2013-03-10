@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+	
+	<head>
+		<meta charset="UTF-8"/>
+		<!-- Scripts -->
+			<script type="text/javascript" src="htmlEl.js"></script>
+			<script type="text/javascript" src="lib.js"></script>
+			<script type="text/javascript" src="main.js"></script>
+			<script type="text/javascript" src="prevcanvas.js"></script>
+			<script type="text/javascript" src="html.js"></script>
+			<script type="text/javascript" src="Pasted.js"></script>
+		<!-- StyleSheets -->
+			<link rel="stylesheet" type="text/css" href="style.css"/>
+		<!-- Fonts -->
+			<link href='http://fonts.googleapis.com/css?family=Signika' rel='stylesheet' type='text/css'/>
+		<title>Odemia</title>
+	</head>
+	
+	<body>
+		<div id = "cWrapper">
+			<div id = "editorBox" class ="mainPanel">
+				<div id="editHolder" class="holder shadow hiddenOverflow">
+					<table class="tables" id="eTable" title="etable">
+
+						<tr>
+							<td id = "eTitle" class = "wrapperBorder allCenter">
+								Edit Your Question
+							</td>
+						</tr>
+
+						<tr>
+							<td id = "eHeader" class = "wrapperBorder vCenter leftMargin">
+								Header
+							</td>
+						</tr>
+
+						<tr>
+							<td class = "wrapperBorder">
+								<textarea class = "empty noResize dark" title = "header" id="eHeaderInput" spellcheck="false">Subject: Question x</textarea>
+							</td>
+						</tr>
+
+						<tr>
+							<td id = "eMedia" class = "wrapperBorder vCenter leftMargin">
+								Add Media
+							</td>
+						</tr>
+
+						<tr>
+							<td  class = "wrapper shadowInner">
+								<img src="q1.jpg" id = "q1" alt="q1"></img>
+								<img src="q2.png" id = "q2" alt="q1"></img>
+							</td>
+						</tr>
+
+						<tr>
+							<td id = "eQuestion" class = "wrapperBorder vCenter  leftMargin">
+								Question Text
+							</td>
+						</tr>
+
+						<tr>
+							<td class = "wrapperBorder shadowInner">
+								<textarea class="empty dark" title="question" id="eText" spellcheck="false">Example Question: The Crusades, between 11th and 13th Centuries, were primarily Catholics attempting to purge which religious group?</textarea>
+							</td>
+						</tr>
+
+						<tr>
+						<td id = "eAnswers" class = "wrapperBorder vCenter leftMargin">
+								Add Answers
+							</td>
+						</tr>
+
+						<tr>
+							<td class = "wrapperBorder">
+								<textarea class = "empty noResize dark" title="inputAnsewer" id="eInsertAnswer" spellcheck="false">Insert answer</textarea>
+							</td>
+						</tr>						
+					</table>
+					<div class = "wrapperBorder"  id="answersTA">
+						<form>
+						<label class="leftMargin" for="X1">Answers</label>
+						<label class="tick" for="X2">Correct</label>
+						<label class="delete" for="X3">Delete</label>
+						<input type="radio" id="X1" title="a"></input>
+						<input type="submit" id="X2" title="b"></input>
+						<input id="X3" title="c"></input>
+					</form>
+					</div>
+				</div>
+			</div>
+			<div id="rescalerR">
+				<div class="rescaleIcon"></div>
+			</div>
+			<div id = "previewBox" class = "mainPanel">
+				<div id="canvasHolder" class="holder shadow hiddenOverflow">
+					<table class="tables" id="pTable" title="pTable">
+						<tr>
+							<td id = "pTitle" class = "wrapperBorder allCenter">
+								Preview
+							</td>
+						</tr>
+						<tr>
+							<td id = "canvas" class = "empty">
+								<canvas id = "pCanvas">Your browser does not support canvas</canvas>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div id="sideBar">
+			</div>
+			<div id="rescalerL">
+				<div class="rescaleIcon"></div>
+			</div>
+		</div>
+		<div id = "playWrapper" class = "backWrapper"> <div class = "playBox shadow">This is where the questions (fed by the server) will be displayed </div></div>
+		<div id = "accountWrapper" class = "backWrapper"> <div class = "playBox shadow" id="accountBox">This is where your account settings will be fed </div></div>
+		<div id = "aboutWrapper" class = "backWrapper">
+			<div class = "playBox shadow" id = "aboutTop">Who are we?</div>
+			<div class = "playBox shadow" id = "aboutMid">
+				<video width="480" height="320" controls ="controls">
+  					<source src="myVid.mp4" type="video/mp4"/>
+ 					 Your browser does not support the video tag.
+				</video>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+				quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+				consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+				proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+		</div>
+		<div id="topBar" class="shadow">
+		</div>
+		<div id="logo" class="textHolder">Odemia</div>
+		<div id="signup">
+			<div id="centeredText" class = "textHolder">Sign Up</div>
+		</div>
+		<div id="login">
+			<div id="centeredText2" class = "textHolder">Login</div>
+		</div>
+
+	</body>
+
+</html>

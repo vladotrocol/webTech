@@ -1,41 +1,7 @@
-// HTML Elements
-var h = {
-	topBar: "topBar",
-	sideBar: "sideBar",
-	rescalerL: "rescalerL",
-	cWrapper: "cWrapper",
-	editorBox: "editorBox",
-	rescalerR: "rescalerR",
-	previewBox: "previewBox",
-	logo: "logo",
-	signup: "signup",
-	centeredText: "centeredText",
-	centeredText2: "centeredText2",
-	login: "login",
-	eTable: "eTable",
-	editHolder: "editHolder",
-	canvasHolder: "canvasHolder",
-	eTitle: "eTitle",
-	pTitle: "pTitle",
-	pTable: "pTable",
-	eHeader: "eHeader",
-	eMedia: "eMedia",
-	eQuestion: "eQuestion",
-	eAnswers: "eAnswers",
-	eText: "eText",
-	eHeaderInput: "eHeaderInput",
-	pCanvas: "pCanvas",
-	q1: "q1",
-	q2: "q2",
-	eInsertAnswer: "eInsertAnswer",
-	playWrapper	: "playWrapper",
-	accountWrapper: "accountWrapper",
-	aboutWrapper: "aboutWrapper"
-};
-
 var options = ["Play", "Add Question", "Account" , "About"];
 var answers = [];
 var answersEls = [];
+var answersOnCanvas = [];
 
 var l =  new Array();
 var Preview;
@@ -84,7 +50,7 @@ function generateSeparators(n){
 		option.className = "option";
 		option.id = "O"+(i+1); 
 
-		newSeparator.src = ".\\Images\\separator.png";
+		newSeparator.src = "separator.png";
 		newSeparator.style.top = ((i+1)*h.topBar.height*window.innerWidth/wW) + "px";
 		newSeparator.style.width = (h.sideBar.width-2)+"px";
 		newSeparator.style.height = (parseInt(h.sideBar.height/400,10))+ "px";
@@ -152,6 +118,7 @@ function sizeElements(){
 	h.eAnswers.Font(h.topBar.height*3/7);
 	h.eHeaderInput.Font(h.topBar.height*2/3);
 	h.eInsertAnswer.Font(h.topBar.height*2/3);
+	document.getElementById("answersTA").style.fontSize = h.topBar.height/3 + "px";
 	resizeContents();
 }
 
@@ -207,6 +174,8 @@ function resizeContentFonts(){
 	h.eAnswers.Font(h.eHeader.initFont*window.innerHeight/wH);
 	h.eHeaderInput.Font(h.topBar.height*2/3);
 	h.eInsertAnswer.Font(h.topBar.height*2/3);
+		document.getElementById("answersTA").style.fontSize = h.topBar.height/3 + "px";
+
 	resizeEAnswers();
 }
 
@@ -341,6 +310,15 @@ function resizeFormFonts(){
 	}
 }
 
+function putAnswersOnCanvas(offset, globalOffset){
+	for(var i in answers){
+		var ans = new T(Preview.w/2, Preview.h/2+globalOffset+(i*offset), h.topBar.height*3/7, answers[i], "#ccc","center");
+		Preview.add_shape(ans);
+
+	}
+	Preview.draw();
+}
+
 function initcanvas(){
 	Preview = new CanvasObj(h.pCanvas.el, 0, 0, h.canvasHolder.width-10,h.canvasHolder.height*11/12,"#00b");
 	var header = new T(2, 2, h.topBar.height*3/7, h.eHeaderInput.el.value, "#ccc","left");
@@ -350,6 +328,7 @@ function initcanvas(){
 	Preview.add_shape(questionbody);
 	Preview.add_shape(im);
 	Preview.draw();
+	putAnswersOnCanvas(25, 200);
 }
 
 function initHtml(){
@@ -374,6 +353,12 @@ function insertAnswer(s){
 		answersEls.push(la);
 		del.className="delete";
 		del.type="checkbox";
+		del.id= s;
+		del.onchange = function(e){
+			del.parentNode.parentNode.removeChild(del.parentNode);
+			removeA(answers,del.id);
+			initcanvas();
+		};
 		c.className="tick";
 		c.type="checkbox";
 		la.appendChild(t);
@@ -409,6 +394,7 @@ function addAnswer(e){
 			alert("You can have a maximum of 5 answers per question")
 		}
 		h.eInsertAnswer.el.value="";
+		putAnswersOnCanvas(25, 100);
 	}
 }
 

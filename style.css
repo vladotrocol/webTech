@@ -39,7 +39,7 @@
 
 #topBar{
 	position: absolute;
-    background-image:url(".\\Images\\tile3.png");
+    background-image:url("tile3.png");
 	background-repeat:repeat;
 }
 
@@ -112,7 +112,7 @@
 
 #cWrapper{
 	position: absolute;
-    background-image:url(".\\Images\\tile1.png");
+    background-image:url("tile1.png");
 	background-repeat:repeat;
 }
 
@@ -120,7 +120,7 @@
 	position: relative;
    	margin-left: auto;
    	margin-right: auto;
-    background-image:url(".\\Images\\tile2.png");
+    background-image:url("tile2.png");
 	background-repeat:repeat;
 	overflow: auto;
 }
@@ -203,7 +203,7 @@
 	height: 40%;
 	top: 30%;
 	left: 30%;
-    background-image:url(".\\Images\\tile2.png");
+    background-image:url("tile2.png");
 	background-repeat:repeat;
 	border: 3px solid;
 	border-color: #ccc;
@@ -233,12 +233,12 @@
 	background-size: 12% 100%;
 	background-position: left;
 	padding-left: 6%;
-	background-image:url(".\\Images\\user.png");
+	background-image:url("user.png");
 }
 
 #inputBox2{
 	top:40%;
-	background-image:url(".\\Images\\pass.png");
+	background-image:url("pass.png");
 }
 
 
@@ -275,7 +275,7 @@
 
 #facebook{
 	left: 14%;
-    background-image:url(".\\Images\\facebook.png");
+    background-image:url("facebook.png");
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 }
@@ -296,7 +296,7 @@
 
 #google{
 	right:14%;
-    background-image:url(".\\Images\\google.png");
+    background-image:url("google.png");
     background-size: 100% 100%;
 	background-repeat: no-repeat;
 }
@@ -320,7 +320,7 @@
 	top: 55%;
 	height: 8%;
 	width: 14%;
-	background-image:url(".\\Images\\login.png");
+	background-image:url("login.png");
     background-size: 100% 100%;
 	background-repeat: no-repeat;
 	border: none;
@@ -347,7 +347,7 @@
 	width: 100%;
 	top: 45%;
 	left: 0px;
-	background-image:url(".\\Images\\scale.png");
+	background-image:url("scale.png");
     background-size: 100% 100%;
 	background-repeat: no-repeat;
 }
@@ -384,11 +384,15 @@
 
 .backWrapper{
 	position: absolute;
-	background-image:url(".\\Images\\tile5.png");
+	background-image:url("tile5.png");
 	background-repeat:repeat;
 	display: none;
 	color: white;
 	font-size: 200px;
+}
+
+#X1,#X2,#X3{
+	display: none;
 }
 
 .tick{
@@ -400,4 +404,59 @@
 .delete{
 	position: absolute;
 	right: 10%;
+}
+
+.playBox{
+	position: absolute;
+	display: table-cell;
+	width: 60%;
+	height: 80%;
+	top: 10%;
+	left: 20%;
+    background-image:url("tile2.png");
+	background-repeat:repeat;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 0.2em;
+	color: #888;
+	overflow: auto;
+}
+
+#accountBox{
+	width:90%;
+	height: 90%;
+	top:5%;
+	left: 5%;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 0.2em;
+	color: #888;
+}
+
+#aboutTop{
+	display: table-cell;
+	width: 90%;
+	height: 10%;
+	top: 5%;
+	left: 5%;
+	color: #086BA2;
+	font-size: 0.2em;
+	vertical-align: middle;
+	text-align: center;
+}
+
+#aboutMid{
+	width: 90%;
+	height: 75%;
+	top: 20%;
+	left: 5%;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	font-size: 0.1em;
+}
+
+p{
+	padding:40px;
 }
