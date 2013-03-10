@@ -35,6 +35,7 @@ var h = {
 
 var options = ["Play", "Add Question", "Account" , "About"];
 var answers = [];
+var answersEls = [];
 
 var l =  new Array();
 var Preview;
@@ -206,10 +207,13 @@ function resizeContentFonts(){
 	h.eAnswers.Font(h.eHeader.initFont*window.innerHeight/wH);
 	h.eHeaderInput.Font(h.topBar.height*2/3);
 	h.eInsertAnswer.Font(h.topBar.height*2/3);
+	resizeEAnswers();
 }
 
 function resizeEAnswers(){
-	for(var i in answers){
+
+	for(var an in answersEls){
+		answersEls[an].style.fontSize = h.topBar.height/3+"px";
 	}
 }
 
@@ -360,17 +364,20 @@ function initHtml(){
 
 function insertAnswer(s){
 		var d = document.createElement("div");
-		var l = document.createElement("label");
+		var la = document.createElement("label");
 		var t = document.createTextNode(s);
 		var c = document.createElement("input");
 		var del = document.createElement("input");
-
+		la.style.fontSize = h.topBar.height/3+"px";
+		la.className="leftMargin";
+		la.id= "A"+(answers.length+1);
+		answersEls.push(la);
 		del.className="delete";
 		del.type="checkbox";
 		c.className="tick";
 		c.type="checkbox";
-		l.appendChild(t);
-		d.appendChild(l);
+		la.appendChild(t);
+		d.appendChild(la);
 		d.appendChild(c);
 		d.appendChild(del);
 		h.editHolder.el.appendChild(d);
@@ -395,8 +402,12 @@ function addListeners(){
 
 function addAnswer(e){
 	if(e.keyCode==13){
-		answers.push(h.eInsertAnswer.el.value);
-		insertAnswer(h.eInsertAnswer.el.value);
+		if(answers.length<5){
+			answers.push(h.eInsertAnswer.el.value);
+			insertAnswer(h.eInsertAnswer.el.value);
+		}else{
+			alert("You can have a maximum of 5 answers per question")
+		}
 		h.eInsertAnswer.el.value="";
 	}
 }
