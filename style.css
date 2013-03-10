@@ -130,6 +130,12 @@
 	font-family: 'Signika', sans-serif;
 }
 
+.wrapperDark{
+	background-color: #333;
+	color: #eee;
+	font-family: 'Signika', sans-serif;
+}
+
 .wrapperBorder{
 	border-bottom: 1px solid;
 	border-color: #ddd;
@@ -381,4 +387,17 @@
 	background-image:url(".\\Images\\tile5.png");
 	background-repeat:repeat;
 	display: none;
+	color: white;
+	font-size: 200px;
+}
+
+.tick{
+	position: absolute;
+	right: 20%;
+}
+
+
+.delete{
+	position: absolute;
+	right: 10%;
 }

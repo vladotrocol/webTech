@@ -28,10 +28,12 @@ var h = {
 	q1: "q1",
 	q2: "q2",
 	eInsertAnswer: "eInsertAnswer",
-	playWrapper	: "playWrapper"
+	playWrapper	: "playWrapper",
+	accountWrapper: "accountWrapper",
+	aboutWrapper: "aboutWrapper"
 };
 
-var options = ["Play", "Add Question", "Account"];
+var options = ["Play", "Add Question", "Account" , "About"];
 var answers = [];
 
 var l =  new Array();
@@ -92,14 +94,32 @@ function generateSeparators(n){
 	}
 	document.getElementById("O1").onclick = play;
 	document.getElementById("O2").onclick = edit;
+	document.getElementById("O3").onclick = account;
+	document.getElementById("O4").onclick = about;
 }
 
 function play(e){
 	h.playWrapper.el.style.display = "block";
+	h.aboutWrapper.el.style.display = "none";
+	h.accountWrapper.el.style.display = "none";
 }
 
 function edit(e){
 	h.playWrapper.el.style.display = "none";
+	h.aboutWrapper.el.style.display = "none";
+	h.accountWrapper.el.style.display = "none";
+}
+
+function account(e){
+	h.playWrapper.el.style.display = "none";
+	h.aboutWrapper.el.style.display = "none";
+	h.accountWrapper.el.style.display = "block";
+}
+
+function about(e){
+	h.playWrapper.el.style.display = "none";
+	h.aboutWrapper.el.style.display = "block";
+	h.accountWrapper.el.style.display = "none";
 }
 
 
@@ -117,6 +137,8 @@ function sizeElements(){
 	resEl(h.centeredText, h.topBar.height/3, 0, 0, h.sideBar.width/2);
 	resEl(h.centeredText2, h.topBar.height/3, 0, 0, h.sideBar.width/2);
 	resEl(h.playWrapper, h.topBar.height-1, h.sideBar.width, window.innerHeight-h.topBar.height, window.innerWidth-h.sideBar.width);
+	resEl(h.accountWrapper, h.topBar.height-1, h.sideBar.width, window.innerHeight-h.topBar.height, window.innerWidth-h.sideBar.width);
+	resEl(h.aboutWrapper, h.topBar.height-1, h.sideBar.width, window.innerHeight-h.topBar.height, window.innerWidth-h.sideBar.width);
 
 	h.logo.Font(h.topBar.height*2/3);
 	h.centeredText.Font(h.topBar.height/3);
@@ -183,11 +205,11 @@ function resizeContentFonts(){
 	h.eQuestion.Font(h.eHeader.initFont*window.innerHeight/wH);
 	h.eAnswers.Font(h.eHeader.initFont*window.innerHeight/wH);
 	h.eHeaderInput.Font(h.topBar.height*2/3);
+	h.eInsertAnswer.Font(h.topBar.height*2/3);
 }
 
 function resizeEAnswers(){
 	for(var i in answers){
-
 	}
 }
 
@@ -327,13 +349,31 @@ function initcanvas(){
 }
 
 function initHtml(){
+	load_images(image_sources, function(images){});
 	initElements();
 	sizeElements();
 	initSizeHtml();
-	generateSeparators(3);
+	generateSeparators(4);
 	initLoginEls();
-	load_images(image_sources, function(images){});
 	initcanvas();
+}
+
+function insertAnswer(s){
+		var d = document.createElement("div");
+		var l = document.createElement("label");
+		var t = document.createTextNode(s);
+		var c = document.createElement("input");
+		var del = document.createElement("input");
+
+		del.className="delete";
+		del.type="checkbox";
+		c.className="tick";
+		c.type="checkbox";
+		l.appendChild(t);
+		d.appendChild(l);
+		d.appendChild(c);
+		d.appendChild(del);
+		h.editHolder.el.appendChild(d);
 }
 
 
@@ -350,8 +390,16 @@ function addListeners(){
 	h.login.el.onclick= openLoginWindow;
 	h.eHeaderInput.el.onkeyup = updateCanvasHeader;
 	h.eText.el.onkeyup = updateCanvasBody;
+	h.eInsertAnswer.el.onkeyup = addAnswer;
 }
 
+function addAnswer(e){
+	if(e.keyCode==13){
+		answers.push(h.eInsertAnswer.el.value);
+		insertAnswer(h.eInsertAnswer.el.value);
+		h.eInsertAnswer.el.value="";
+	}
+}
 
 function viewDidLoad(){
 	wW = window.innerWidth;

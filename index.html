@@ -21,52 +21,72 @@
 			<div id = "editorBox" class ="mainPanel">
 				<div id="editHolder" class="holder shadow hiddenOverflow">
 					<table class="tables" id="eTable">
+
 						<tr>
 							<td id = "eTitle" class = "wrapperBorder allCenter">
 								Edit Your Question
 							</td>
 						</tr>
+
 						<tr>
 							<td id = "eHeader" class = "wrapperBorder vCenter leftMargin">
 								Header
 							</td>
 						</tr>
+
 						<tr>
 							<td class = "wrapperBorder">
 								<textarea class = "empty noResize dark" id="eHeaderInput" spellcheck="false">Subject: Question x</textarea>
 							</td>
 						</tr>
+
 						<tr>
 							<td id = "eMedia" class = "wrapperBorder vCenter leftMargin">
 								Add Media
 							</td>
 						</tr>
+
 						<tr>
 							<td  class = "wrapper shadowInner">
 								<img src="Images\q1.jpg" id = "q1"></img>
 								<img src="Images\q2.png" id = "q2"></img>
 							</td>
 						</tr>
+
 						<tr>
 							<td id = "eQuestion" class = "wrapperBorder vCenter  leftMargin">
 								Question Text
 							</td>
 						</tr>
+
 						<tr>
 							<td class = "wrapperBorder shadowInner">
 								<textarea class="empty dark" id="eText" spellcheck="false">Why don't you add a question text?</textarea>
 							</td>
 						</tr>
+
+						<tr>
 						<td id = "eAnswers" class = "wrapperBorder vCenter leftMargin">
 								Add Answers
 							</td>
 						</tr>
+
 						<tr>
 							<td class = "wrapperBorder">
 								<textarea class = "empty noResize dark" id="eInsertAnswer" spellcheck="false">Insert answer</textarea>
 							</td>
-						</tr>
+						</tr>						
 					</table>
+					<div id="eAnswers" class = "wrapperBorder">
+						<label class="leftMargin">Answers</label>
+						<label class="tick">Correct</label>
+						<label class="delete">Delete</label>
+					</div>
+					<div id="eAnswers" class = "wrapperBorder">
+						<label class="leftMargin">Answers</label>
+						<input type="checkbox" class="tick">
+						<input type="checkbox" class="delete">
+					</div>
 				</div>
 			</div>
 			<div id="rescalerR">
@@ -94,7 +114,9 @@
 				<div class="rescaleIcon"></div>
 			</div>
 		</div>
-		<div id = "playWrapper" class = "backWrapper"></div>
+		<div id = "playWrapper" class = "backWrapper"> Play Soon</div>
+		<div id = "accountWrapper" class = "backWrapper"> My account</div>
+		<div id = "aboutWrapper" class = "backWrapper"> What is this?</div>
 		<div id="topBar" class="shadow">
 		</div>
 		<div id="logo" class="textHolder">Odemia</div>
